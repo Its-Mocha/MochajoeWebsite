@@ -21,7 +21,7 @@ This site isn't just a static page; it's a piece of my Home Lab infrastructure.
 
 ## 🛠️ Local Development
 If you want to run this project locally:
-1. Clone the repo: `git clone [YOUR_REPO_URL]`
+1. Clone the repo: `git clone https://github.com/Its-Mocha/Portfolio`
 2. Install dependencies: `npm install`
 3. Start the dev server: `npm run dev`
 4. Open [http://localhost:3000](http://localhost:3000)
