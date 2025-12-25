@@ -1,127 +1,137 @@
-import Image from "next/image";
-import { Shield, Server, Cpu, ExternalLink, Github, Linkedin } from "lucide-react";
+import React from 'react';
+import Link from 'next/link';
+import { Terminal } from 'lucide-react';
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <main className="min-h-screen bg-dark-bg text-slate-300 p-6 md:p-12 font-sans">
-      <div className="max-w-4xl mx-auto space-y-12">
-        
-        {/* HEADER SECTION */}
-        <header className="flex flex-col md:flex-row items-center gap-8">
-          <div className="relative w-48 h-48 rounded-2xl border-2 border-cyber-blue shadow-glow overflow-hidden group">
-            <Image
-             src="/me-1.jpeg" 
-            alt="Joseph Ducharme"
-            width={192}   // This matches w-48 (48 * 4)
-            height={192}  // This matches h-48
-            quality={100} // Force Next.js to use maximum quality
-            priority      // Ensure it's not "lazy loaded"
-            className="rounded-2xl border-2 border-cyber-blue shadow-glow object-cover -translate-y-4"
-            />
-          </div>
+    <div className="min-h-screen bg-black text-zinc-100 font-mono selection:bg-red-500/30 overflow-hidden relative">
+      
+      {/* 1. THE GRID BACKGROUND */}
+      <div 
+        className="absolute inset-0 z-0 opacity-20 pointer-events-none" 
+        style={{ 
+          backgroundImage: `
+            linear-gradient(to right, #3f3f46 1px, transparent 1px),
+            linear-gradient(to bottom, #3f3f46 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px' 
+        }}
+      ></div>
 
-          <div className="text-center md:text-left">
-            <h1 className="text-5xl font-extrabold text-white tracking-tight mb-2">
-              Joseph Ducharme
-            </h1>
-            <p className="text-xl text-cyber-blue font-medium mb-4">
-              Proxmox Enthusiast | AI Developer | Home Lab Wizard
-            </p>
-            <div className="h-px w-full bg-slate-800 my-6" />
-            <p className="text-lg leading-relaxed">
-              Currently running <span className="text-white font-semibold">DeepSeek-R1</span> on an 
-              <span className="text-cyber-blue"> RTX A2000</span> Proxmox node.
-            </p>
+      {/* 2. SCANLINE OVERLAY (Optional but adds to the vibe) */}
+      <div className="absolute inset-0 z-10 pointer-events-none bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_2px,3px_100%]"></div>
+
+      {/* 3. CONTENT WRAPPER */}
+      <div className="relative z-20 flex flex-col min-h-screen">
+        
+        {/* TOP HUD */}
+        <header className="border-b border-zinc-800 bg-black/80 p-4 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <div className="flex items-center gap-4">
+              <div className="w-2 h-2 bg-red-600 shadow-[0_0_10px_red] animate-pulse"></div>
+              <span className="text-[15px] tracking-[0.4em] uppercase font-bold text-zinc-400">Mainframe</span>
+            </div>
+            <div className="text-[15px] text-red-600 uppercase tracking-widest animate-pulse">
+              System_Online
+            </div>
           </div>
         </header>
 
-        {/* SYSTEM SPECS BOX (DASHBOARD STYLE) */}
-        <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 shadow-2xl">
-          <div className="flex items-center gap-2 mb-4 text-white font-bold uppercase tracking-wider text-sm">
-            <Cpu className="w-4 h-4 text-cyber-blue" />
-            System Specs
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="flex justify-between p-2 border-b border-slate-800">
-              <span className="text-slate-500">Host</span>
-              <span className="text-slate-200">Proxmox VE 8.x</span>
-            </div>
-            <div className="flex justify-between p-2 border-b border-slate-800">
-              <span className="text-slate-500">GPU</span>
-              <span className="text-slate-200">RTX A2000 (6GB GDDR6)</span>
-            </div>
-            <div className="flex justify-between p-2 border-b border-slate-800">
-              <span className="text-slate-500">AI Engine</span>
-              <span className="text-slate-200">Ollama / DeepSeek-R1</span>
-            </div>
-            <div className="flex justify-between p-2 border-b border-slate-800">
-              <span className="text-slate-500">Storage</span>
-              <span className="text-slate-200">ZFS Mirrored SSDs</span>
-            </div>
-          </div>
-        </section>
+        <main className="flex-grow flex flex-col justify-center max-w-6xl mx-auto px-6 w-full">
+          
+{/* TITLE SECTION */}
+<div className="mb-16 border-l-2 border-red-600 pl-8">
+  <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase leading-none">
+    Control <br />
+    <span className="text-zinc-500">Center</span>
+  </h1>
+  
+  {/* MISSION BRIEFING (Your new section) */}
+  <div className="mt-6 max-w-xl">
+    <p className="text-zinc-400 text-sm md:text-base leading-relaxed font-sans tracking-wide">
+      <span className="text-red-600 font-bold uppercase mr-2">[Briefing]</span> 
+      Welcome to the <span className="text-white">Mainframe</span>. This is my central landing page where you can monitor 
+      live <span className="text-white">Network Stats</span> from my Pi-hole, explore my <span className="text-white">Development Portfolio</span>, 
+      or interface with my <span className="text-white">AI Terminal</span>.
+    </p>
+  </div>
 
-        {/* BUTTON GROUP */}
-        <div className="flex flex-wrap gap-4 justify-center md:justify-start">
-          <a href="https://ai.mochajoe.dev" className="flex items-center gap-2 px-6 py-3 bg-cyber-blue text-slate-950 font-bold rounded-lg hover:shadow-glow transition-all active:scale-95">
-            <Cpu className="w-5 h-5" /> Launch AI
-          </a>
-          <a href="https://github.com/its-mocha" target="_blank" className="flex items-center gap-2 px-6 py-3 border border-slate-700 hover:border-cyber-blue hover:text-white rounded-lg transition-all">
-            <Github className="w-5 h-5" /> GitHub
-          </a>
-          <a href="https://linkedin.com/in/itsmocha" target="_blank" className="flex items-center gap-2 px-6 py-3 border border-slate-700 hover:border-cyber-blue hover:text-white rounded-lg transition-all">
-            <Linkedin className="w-5 h-5" /> LinkedIn
-          </a>
-        </div>
+  <div className="flex gap-4 mt-6 text-[10px] text-zinc-600 uppercase tracking-[0.2em] font-bold">
+    <span>Operator: Mochajoe</span>
+    <span>//</span>
+    <span>Status: Active</span>
+  </div>
+</div>
+          
+          {/* MODULE GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+            
+            
 
-        {/* ABOUT ME SECTION */}
-        <section className="space-y-4 text-gray-400 leading-relaxed">
-         <p>
-          I am an <strong className="text-white">IT Technician</strong> at <strong className="text-cyber-blue">Ducommun AeroStructures</strong> armed with a B.S. in Computer Science. 
-          Currently, I specialize in <strong className="text-white">Identity Management</strong> and security compliance. 
-          I play a key role in hardening our infrastructure by driving CMMC standards and deploying Multi-Factor Authentication (MFA) across the organization.
-        </p>
+            {/* PORTFOLIO MODULE */}
+            <Link href="/portfolio" className="group bg-zinc-950/80 border border-zinc-800 p-8 hover:bg-red-950/10 hover:border-red-600 transition-all">
+              <span className="text-red-600 text-xs mb-2 block font-bold">01</span>
+              <h2 className="text-xl font-bold uppercase group-hover:tracking-widest transition-all">Portfolio</h2>
+              <p className="text-zinc-500 text-[10px] mt-4 leading-relaxed uppercase tracking-tighter">
+                Dev Archive / Proxmox Lab / Infrastructure Docs
+              </p>
+            </Link>
+
+            {/* STATS MODULE */}
+            <Link href="/stats" className="group bg-zinc-950/80 border border-zinc-800 p-8 hover:bg-red-950/10 hover:border-red-600 transition-all">
+              <span className="text-red-600 text-xs mb-2 block font-bold">02</span>
+              <h2 className="text-xl font-bold uppercase group-hover:tracking-widest transition-all">Network Stats</h2>
+              <p className="text-zinc-500 text-[10px] mt-4 leading-relaxed uppercase tracking-tighter">
+                Pi-Hole Telemetry / Python Script Logs / Cloud Sync
+              </p>
+            </Link>
+
+            {/* AI MODULE */}
+            <a href="https://ai.mochajoe.dev" target="_blank" rel="noopener noreferrer" className="group bg-zinc-950/80 border border-zinc-800 p-8 hover:bg-red-950/10 hover:border-red-600 transition-all">
+              <span className="text-red-600 text-xs mb-2 block font-bold">03</span>
+              <h2 className="text-xl font-bold uppercase group-hover:tracking-widest transition-all">AI Terminal</h2>
+              <p className="text-zinc-500 text-[10px] mt-4 leading-relaxed uppercase tracking-tighter">
+                LLM Integration / Heuristic Processing / Neural Link
+              </p>
+           </a>
+
+          </div>
         
-        <p>
-          Beyond security, I bring hands-on operational experience managing <strong>200+ endpoints</strong>. 
-          From leading large-scale <strong className="text-white">Windows 11 migrations</strong> to administering Active Directory environments, I bridge the gap between complex backend systems and end-user needs. 
-          I pride myself on a <strong className="text-cyber-blue">"Do whatever it takes"</strong> attitude, combining deep diagnostic skills with the ability to communicate technical solutions clearly.
-        </p>
-        </section>
 
-        {/* SKILLS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="p-6 bg-slate-900/30 border border-slate-800 rounded-xl hover:border-cyber-blue/50 transition-colors">
-            <h4 className="flex items-center gap-2 text-white font-bold mb-4">
-              <Shield className="w-5 h-5 text-cyber-blue" /> Cybersecurity
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>• CrowdStrike & Tanium EDR</li>
-              <li>• MFA (YubiKey/Smart Cards)</li>
-              <li>• Active Directory & GPO</li>
-            </ul>
-          </div>
-
-          <div className="p-6 bg-slate-900/30 border border-slate-800 rounded-xl hover:border-cyber-blue/50 transition-colors">
-            <h4 className="flex items-center gap-2 text-white font-bold mb-4">
-              <Server className="w-5 h-5 text-cyber-blue" /> Home Lab
-            </h4>
-            <ul className="space-y-2 text-sm">
-              <li>• Proxmox VE 8.x Cluster</li>
-              <li>• ZFS Mirrored Storage</li>
-              <li>• Ollama / DeepSeek-R1 Local AI</li>
-            </ul>
-          </div>
+        {/* HARDWARE MANIFEST (System Specs) */}
+<section className="bg-zinc-950 border border-zinc-800 p-1 mt-12">
+  <div className="bg-zinc-900/50 p-6 md:p-8 border border-zinc-800">
+    {/* Header with extra bottom margin */}
+    <div className="flex items-center gap-2 mb-8 text-red-600 font-bold uppercase tracking-[0.2em] text-xs">
+      <Terminal className="w-4 h-4" /> Hardware_Manifest
+    </div>
+    
+    {/* Changed to grid-cols-3 to match your 3 items */}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-x-12">
+      {[
+        { label: "Host", val: "2 Clustered Proxmox VE Nodes" },
+        { label: "GPU", val: "RTX A2000 6GB // DeepSeek-R1" },
+        { label: "Network", val: "pfSense, Pi-hole, TP-Link Managed switch" }
+      ].map((item, i) => (
+        <div key={i} className="relative border-l border-zinc-800 pl-6 group">
+          {/* Subtle hover accent */}
+          <div className="absolute left-0 top-0 w-[1px] h-0 bg-red-600 group-hover:h-full transition-all duration-300"></div>
+          
+          <span className="block text-[10px] text-zinc-500 uppercase mb-2 tracking-widest font-bold">
+            {item.label}
+          </span>
+          
+          {/* leading-relaxed helps the long strings look better if they wrap */}
+          <span className="text-xs md:text-sm text-zinc-200 font-bold leading-relaxed block">
+            {item.val}
+          </span>
         </div>
-
-        {/* EDUCATION & CERTS */}
-        <footer className="pt-8 border-t border-slate-800 text-sm">
-          <h3 className="text-white font-bold mb-4">Education & Certifications</h3>
-          <p><strong>B.S. in Computer Science</strong> - SNHU</p>
-          <p className="text-cyber-blue"><strong>CompTIA Security+</strong> (In Progress - 2026)</p>
-          <p>Google Networking Fundamentals</p>
-        </footer>
+      ))}
+    </div>
+  </div>
+</section>
+</main>
       </div>
-    </main>
+    </div>
   );
 }
